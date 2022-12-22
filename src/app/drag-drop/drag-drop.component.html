@@ -1,0 +1,54 @@
+
+<form [formGroup]="usersGroup">
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+
+
+  <table>
+    <tr>
+      <th>Drag</th>
+      <th>Name</th>
+      <th>Job</th>
+      <th>Dynamic List</th>
+    </tr>
+      <ng-container formArrayName="usersform" *ngFor = "let user of usersControls;let i =index" >
+    <tr [formGroupName]="i" cdkDrag>
+      <td>
+        <span class="material-icons" cdkDragHandle>open_with</span>
+      </td>
+      <td>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+      </td>
+
+
+      <td>
+        <mat-form-field appearance="outline">
+          <mat-label>Job</mat-label>
+          <input matInput formControlName="job">
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field appearance="outline">
+          <mat-label>Quote</mat-label>
+          <mat-select formControlName="Dynmaic_id">
+          <mat-option *ngFor="let item of List" [value]="item.quote">{{item['quote']}}</mat-option>
+        </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <div (click)="add()" class="icon icon-add"><span class="material-icons">add</span></div>
+      </td>
+      <td>
+        <div (click)="deleteUser(i)" class="icon icon-delete" ><span class="material-icons">delete</span></div>
+      </td>
+  </ng-container>
+    </table>
+  </div>
+  </form>
+
+
+
+
